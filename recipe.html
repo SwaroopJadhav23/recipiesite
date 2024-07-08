@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Detail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="page-title">Recipe Detail</h1>
+        <p id="recipe-count" class="recipe-count"></p> <!-- Display recipe count here -->
+        <div id="recipe-details"></div>
+        <div id="recipes-container"></div>
+        <button id="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function goBack() {
+            window.history.back(); // Go back to the previous page
+        }
+
+        function loadContent() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ingredient = urlParams.get('ingredient');
+            const recipeName = urlParams.get('recipe');
+
+            if (ingredient) {
+                document.getElementById('page-title').textContent = '';
+                displayRecipes(ingredient);
+            } else if (recipeName) {
+                document.getElementById('page-title').textContent = 'Recipe Detail';
+                loadRecipeDetails(recipeName);
+            }
+        }
+
+        // Load content based on query parameters when the page loads
+        document.addEventListener('DOMContentLoaded', loadContent);
+    </script>
+</body>
+</html>
